@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tablet Form – Orders</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OrderBook – Cakeshop</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="app">
-<div class="tablet-frame" id="appRoot">
-<header>
-<div class="month-bar">
-<button class="nav-btn today-btn" id="btnToday">Today</button>
-<div class="centered">
-<button class="nav-btn" id="prevMonth" aria-label="Previous month">◀</button>
-<div class="month-label" id="monthLabel">—</div>
-<button class="nav-btn" id="nextMonth" aria-label="Next month">▶</button>
-</div>
-<div class="right-actions"></div>
-</div>
+  <!-- Password Gate (works with Enter) -->
+  <div id="gate" class="gate visible">
+    <form id="gateForm" class="gate-card">
+      <h1>OrderBook</h1>
+      <p>Enter passcode to continue</p>
+      <input id="gatePass" type="password" autocomplete="current-password" placeholder="Passcode" required />
+      <button id="gateEnter" class="nav-btn" type="submit">Enter</button>
+      <small id="gateHint" class="muted"></small>
+    </form>
+  </div>
 
+  <div class="app" id="app" hidden>
+    <div class="tablet-frame" id="appRoot">
+      <header>
+        <div class="month-bar">
+          <button class="nav-btn today-btn" id="btnToday">Today</button>
+          <div class="centered">
+            <button class="nav-btn" id="prevMonth" aria-label="Previous month">◀</button>
+            <div class="month-label" id="monthLabel">—</div>
+            <button class="nav-btn" id="nextMonth" aria-label="Next month">▶</button>
+          </div>
+          <div class="right-actions"></div>
+        </div>
 
-<!-- compact calendar -->
-<div class="calendar compact" aria-label="Date Picker">
-<div class="dow" id="dow"></div>
-<div class="grid" id="grid" tabindex="0" aria-label="Calendar grid"></div>
-</div>
-</header>
+        <!-- compact calendar -->
+        <div class="calendar compact" aria-label="Date Picker">
+          <div class="dow" id="dow"></div>
+          <div class="grid" id="grid" tabindex="0" aria-label="Calendar grid"></div>
+        </div>
+      </header>
 
+      <div class="search-wrap">
+        <div class="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="search" type="search" placeholder="Search name / phone / description" />
+        </div>
+      </div>
 
-<div class="search-wrap">
-<div class="search">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-<input id="search" type="search" placeholder="Search by name / order / phone or type 'today'" />
-</div>
-</div>
+      <div class="add-order-wrap">
+        <form id="addOrderForm">
+          <input type="text" id="orderName" placeholder="Name" required>
+          <input type="text" id="orderPhone" placeholder="Phone" required>
+          <textarea id="orderDesc" placeholder="Cake details / notes" rows="1"></textarea>
+          <label class="file-btn">
+            <input type="file" id="orderImage" accept="image/*" hidden>
+            <span>📷 Receipt</span>
+          </label>
+          <button type="submit" class="nav-btn">Add Order</button>
+        </form>
+      </div>
 
+      <section class="list" id="ordersList" aria-live="polite"></section>
+    </div>
+  </div>
 
-<div class="add-order-wrap">
-<form id="addOrderForm">
-<input type="text" id="orderName" placeholder="Name" required>
-<input type="text" id="orderPhone" placeholder="Phone" required>
-<input type="text" id="orderDesc" placeholder="Description (optional)">
-<button type="submit" class="nav-btn">Add Order</button>
-</form>
-</div>
-
-
-<section class="list" id="ordersList" aria-live="polite"></section>
-
-
-<div class="backup-wrap">
-<div class="backup-row">
-<input type="url" id="webhookUrl" placeholder="Discord Webhook URL for backup" />
-<button class="nav-btn" id="backupBtn">Backup to Discord</button>
-</div>
-<small class="muted">Backups send the full localStorage snapshot as JSON. (Network/CORS policies of your browser apply.)</small>
-</div>
-</div>
-</div>
-
-
-<script src="code.js"></script>
+  <script src="code.js"></script>
 </body>
 </html>
