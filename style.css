@@ -2,37 +2,42 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0; background:var(--bg); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;}
-.app{max-width:920px; margin-inline:auto; padding:16px;}
-.tablet-frame{border:1px solid var(--border); border-radius:24px; overflow:hidden; background:linear-gradient(180deg,#121620 0%, #0f131c 100%); box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);}
-header{padding:12px; display:grid; gap:10px; position:sticky; top:0; background:inherit; backdrop-filter: blur(6px);}
 
+/* Password gate */
+.gate{position:fixed; inset:0; display:grid; place-items:center; background:linear-gradient(180deg,#0f1115,#0b0d12); z-index:100}
+.gate:not(.visible){display:none}
+.gate-card{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:22px; width:min(380px, 92vw); text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.gate-card h1{margin:6px 0 2px}
+.gate-card input{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#111723; color:var(--text); margin:10px 0 12px}
+
+.app{max-width:920px; margin-inline:auto; padding:12px;}
+.tablet-frame{border:1px solid var(--border); border-radius:24px; overflow:hidden; background:linear-gradient(180deg,#121620 0%, #0f131c 100%); box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);} 
+header{padding:12px; display:grid; gap:10px; position:sticky; top:0; background:inherit; backdrop-filter: blur(6px);} 
 
 .month-bar{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px;}
 .month-bar .centered{display:flex; gap:8px; align-items:center; justify-content:center}
 .nav-btn{border:1px solid var(--border); background:var(--panel); color:var(--text); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600;}
 .month-label{text-align:center; font-weight:800;}
 
-
 /* compact calendar */
-.calendar.compact{margin-top:4px; border:1px solid var(--border); border-radius:var(--radius); padding:8px; background:var(--panel);}
+.calendar.compact{margin-top:4px; border:1px solid var(--border); border-radius:var(--radius); padding:8px; background:var(--panel);} 
 .calendar.compact .dow{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px; color:var(--muted); font-size:.8rem}
 .calendar.compact .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; outline:none}
 .calendar.compact .cell{position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; border:1px dashed transparent; border-radius:12px; user-select:none; cursor:pointer; font-weight:700; color:#cfd6e6; font-size:.9rem; padding:2px}
 .cell:hover{border-color:var(--border); background:#171c27}
 .cell.muted{color:#6b7386}
 .cell.selected{outline:2px solid var(--accent); background:rgba(90,200,250,.08)}
-.cell.today::after{content:""; position:absolute; width:6px; height:6px; border-radius:50%; bottom:4px; background:var(--danger);}
+.cell.today::after{content:""; position:absolute; width:6px; height:6px; border-radius:50%; bottom:4px; background:var(--danger);} 
 
-
-.search-wrap,.add-order-wrap,.backup-wrap{padding:6px 12px 12px;}
-.search,#addOrderForm,.backup-row{display:flex; align-items:center; gap:10px; border:1px solid var(--border); background:var(--panel); border-radius:999px; padding:8px 12px; flex-wrap:wrap;}
-.search input,#addOrderForm input,.backup-row input{flex:1; border:none; outline:none; background:transparent; color:var(--text); font-size:1rem;}
+.search-wrap,.add-order-wrap{padding:6px 12px 12px;}
+.search,#addOrderForm{display:flex; align-items:center; gap:10px; border:1px solid var(--border); background:var(--panel); border-radius:999px; padding:8px 12px; flex-wrap:wrap;}
+.search input,#addOrderForm input,#addOrderForm textarea{flex:1; border:none; outline:none; background:transparent; color:var(--text); font-size:1rem;}
+#addOrderForm textarea{resize:none; min-height:38px;}
+.file-btn{border:1px dashed var(--border); border-radius:999px; padding:6px 10px; cursor:pointer; user-select:none}
 #addOrderForm button{flex:0}
-.muted{color:#9aa3b7}
-
 
 .list{padding:0 12px 18px; max-height:70vh; overflow:auto;}
-.order{position:relative; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; padding:12px 14px; margin:10px 0; border:1px solid var(--border); border-radius:14px; background:var(--panel);}
+.order{position:relative; display:grid; grid-template-columns:auto 1fr auto; align-items:flex-start; gap:12px; padding:12px 14px; margin:10px 0; border:1px solid var(--border); border-radius:14px; background:var(--panel);} 
 .order .bullet{width:24px; height:24px; border-radius:999px; background:#1a2030; border:1px solid var(--border); display:grid; place-items:center; font-size:.8rem; color:#8a93a5}
 .meta{display:flex; gap:8px; flex-wrap:wrap;}
 .tag{font-size:.8rem; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:#cfd6e6;}
@@ -40,11 +45,9 @@ header{padding:12px; display:grid; gap:10px; position:sticky; top:0; background:
 .order-number{color:#a9b1c5; font-weight:700}
 .phone{font-weight:800}
 .left-rail{position:absolute; inset:0 auto 0 0; width:6px; border-radius:14px 0 0 14px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); opacity:.5}
-.paid{background:rgba(76,217,100,.12); border-color:#214a2b; color:#b5f3c4;}
 .paid-rail{background:linear-gradient(180deg, rgba(76,217,100,.6), rgba(76,217,100,0)); opacity:.45}
-.desc{width:100%; border:none; outline:none; background:#101520; color:#dde4f3; padding:8px 10px; border-radius:10px; margin-top:8px; border:1px solid var(--border)}
+.desc{width:100%; border:none; outline:none; background:#101520; color:#dde4f3; padding:8px 10px; border-radius:10px; margin-top:8px; border:1px solid var(--border); resize:none}
+.thumb{width:64px; height:64px; object-fit:cover; border-radius:8px; border:1px solid var(--border)}
+.attach{border:1px dashed var(--border); border-radius:10px; padding:6px 10px; cursor:pointer}
 
-
-@media (max-width:700px){
-.list{max-height:60vh}
-}
+@media (max-width:700px){ .list{max-height:60vh} }
